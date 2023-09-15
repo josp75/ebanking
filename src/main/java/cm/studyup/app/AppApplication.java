@@ -9,6 +9,7 @@ import cm.studyup.app.enums.OperationType;
 import cm.studyup.app.repositories.BankAccountRepository;
 import cm.studyup.app.repositories.CustomerRepository;
 import cm.studyup.app.repositories.OperationRepository;
+import cm.studyup.app.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +25,8 @@ public class AppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
     }
+
+
 
     @Bean
     CommandLineRunner start(
@@ -71,6 +74,13 @@ public class AppApplication {
 
                 }
             });
+        };
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(BankService bankService) {
+        return args -> {
+            bankService.consult();
         };
     }
 }
