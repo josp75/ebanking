@@ -35,10 +35,14 @@ public class AppApplication {
             OperationRepository operationRepository
     ) {
         return args -> {
+            operationRepository.deleteAll();
+            bankAccountRepository.deleteAll();
+            customerRepository.deleteAll();
+
             Stream.of("Jospin", "Pierre", "Jordan").forEach(name -> {
                 Customer customer = new Customer();
                 customer.setName(name);
-                customer.setEmail(name + "@gmail.com");
+                customer.setEmail(name.toLowerCase() + "@gmail.com");
                 customerRepository.save(customer);
             });
 
@@ -64,7 +68,7 @@ public class AppApplication {
 
 
             bankAccountRepository.findAll().forEach(acc -> {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 2; i++) {
                     Operation operation = new Operation();
                     operation.setAmount(Math.random() * 12000);
                     operation.setOperationDate(new Date());

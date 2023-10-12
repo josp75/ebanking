@@ -1,6 +1,7 @@
 package cm.studyup.app.entities;
 
 import cm.studyup.app.enums.AccountStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +31,6 @@ public abstract class BankAccount {
     private Customer customer;
 
     @OneToMany(mappedBy = "bankAccount")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Operation> operations;
 }
